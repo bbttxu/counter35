@@ -10,6 +10,8 @@ Template.venues.venues = () ->
 Template.venues.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
 
+
+
 Template.venues.events
 	'mousedown .venue': (evt) ->
 		Session.set 'venue_id', this._id
@@ -25,7 +27,12 @@ Template.details.venues = () ->
 Template.details.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
 
-
+Template.details.percent_class = () ->
+	percent = Math.round(this.occupancy / this.capacity * 100)
+	return "critical" if percent >= 100
+	return "full" if percent >= 75
+	return "half-full" if percent >= 50
+	"empty"
 
 
 increment_occupancy = (shift) ->
@@ -42,6 +49,6 @@ increment_counter = increment_occupancy(1)
 decrement_counter = increment_occupancy(-1)
 
 Template.details.events
-	'click p.add': increment_counter
-	'click p.subtract': decrement_counter
+	'click a.add': increment_counter
+	'click a.subtract': decrement_counter
 		

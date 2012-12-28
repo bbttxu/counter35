@@ -1,0 +1,20 @@
+/*venues.css*/
+p.critical {
+	font-size: 3em;
+	color:red;
+}
+
+p.full {
+	font-size: 3em;
+	color: orange;
+}
+
+p.half-full {
+	font-size: 3em;
+	color: blue;
+}
+p.empty {
+	color: black;
+	font-size: 3em;
+}
+
