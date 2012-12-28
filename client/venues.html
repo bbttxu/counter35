@@ -23,13 +23,13 @@
 				<div class="columns six mobile-two">
 					<p class="{{percent_class}}">{{percent_full}}%</p>
 				</div>
-				<div class="columns three mobile-two">
-					<ul class="disc panel">
+				<div class="columns six mobile-two">
+					<ul class="disc">
 						<li>{{occupancy}} occupancy</a></li>
 						<li>{{capacity}} capacity</li>
 					</ul>
 				</div>
-				<div class="columns three mobile-four">
+				<div class="columns twelve mobile-four">
 					<ul class="button-group  block-grid two-up">
 						<li><a class="add button success" href="#">+1</a></li>
 						<li><a class="subtract button red" href="#">-1</a></li>
@@ -39,5 +39,18 @@
 		{{/each}}
 	{{else}}
 		<p>Please select a venue from the drop-down.</p>
+	{{/if}}
+</template>
+
+<template name="top_three">
+	{{#if hot}}
+		<div class="panel">
+			<h3>Hot three</h3>
+			<ul class="disc">
+				{{#each hot}}
+					<li>{{name}} {{percent_full}}%</li>
+				{{/each}}
+			</ul>
+		</div>
 	{{/if}}
 </template>
