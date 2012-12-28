@@ -1,16 +1,18 @@
 <!-- venues.html -->
 <template name="venues">
-	<li class="has-dropdown">
-		<a href="#">{{venues.count}} Venues</a>
-		<ul class="dropdown">
-			{{#each venues}}
-				<li class="venue {{selected}}">
-					<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}
-					</a>
-				</li>
-			{{/each}}
-		</ul>
-	</li>
+	<ul class="right">
+		<li class="has-dropdown">
+			<a href="#">{{venues.count}} Venues</a>
+			<ul class="dropdown">
+				{{#each venues}}
+					<li class="venue {{selected}}">
+						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}
+						</a>
+					</li>
+				{{/each}}
+			</ul>
+		</li>
+	</ul>
 </template>
 
 <template name="details">
@@ -48,7 +50,7 @@
 			<h3>Hot three</h3>
 			<ul class="disc">
 				{{#each hot}}
-					<li>{{name}} {{percent_full}}%</li>
+					<li><a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a> {{percent_full}}%</li>
 				{{/each}}
 			</ul>
 		</div>

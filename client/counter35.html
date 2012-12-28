@@ -8,7 +8,7 @@
 
 <body>
 	<div class="row">
-		<div class="twelve columns">
+		<div class="contain-to-grid">
 			<nav class="top-bar">
 				<ul>
 					<li class="name">
@@ -18,20 +18,19 @@
 							</a>
 						</h1>
 					</li>
+					 <li class="toggle-topbar"><a href="#"></a></li>
 				</ul>
 				<section>
-					<ul class="right">
-						{{> venues}}
-					</ul>
+					{{> venues}}
 				</section>
 			</nav>
 		</div>
 	</div>
 	<div class="row">
-		<div class="nine columns">
+		<div class="eight columns">
 			{{> details}}
 		</div>
-		<div class="three columns">
+		<div class="four columns">
 			{{> top_three}}
 		</div>
 	</div>
