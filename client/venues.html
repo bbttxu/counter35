@@ -1,0 +1,41 @@
+<!-- venues.html -->
+<template name="venues">
+	<h3>Todo venues</h3>
+	<div id="venues">
+		{{#each venues}}
+			<div class="venue {{selected}}">
+				{{#if editing}}
+					<div class="edit">
+						<input class="venue-name-input" id="venue-name-input" type="text" value="{{name}}" />
+					</div>
+				{{else}}
+					<div class="display">
+						<a class="venue-name {{name_class}}" href="/{{_id}}">
+							{{name}}
+						</a>
+						<span>{{percent_full}}%</span>
+					</div>
+				{{/if}}
+			</div>
+		{{/each}}
+	</div>
+<!--   <div id="createvenue">
+		<input type="text" id="new-venue" placeholder="New venue" />
+	</div>
+ -->
+
+	<div>
+		{{> details}}
+	</div>
+</template>
+
+<template name="details">
+	<h3>Details</h3>
+	{{#each venues}}
+		<p>{{name}} is {{percent_full}} full.</p>
+		<p>{{name}} has room for {{capacity}} and currently has {{occupancy}}.</p>
+		<hr/>
+		<p class="add">Add</p>
+		<p class="subtract">Subtract</p>
+	{{/each}}
+</template>
