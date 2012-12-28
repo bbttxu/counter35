@@ -17,6 +17,15 @@ Template.top_three.hot = () ->
 	venues.sort( popularity_sort )
 	venues.slice(0,3)
 
+Template.top_three.events
+	'mousedown a.venue-name': (evt) ->
+		Session.set 'venue_id', this._id
+		Router.setVenue(this._id)
+	'click a.venue-name': (evt) ->
+		evt.preventDefault()
+
+
+
 Template.top_three.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
 
