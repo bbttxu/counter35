@@ -1,18 +1,15 @@
 <!-- venues.html -->
 <template name="venues">
-	<ul class="right">
-		<li class="has-dropdown">
-			<a href="#">{{venues.count}} Venues</a>
-			<ul class="dropdown">
+	{{#if venues}}
+		<div class="panel">
+			<h3>All Venues</h3>
+			<ul class="disc">
 				{{#each venues}}
-					<li class="venue {{selected}}">
-						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}
-						</a>
-					</li>
+					<li><a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a></li>
 				{{/each}}
 			</ul>
-		</li>
-	</ul>
+		</div>
+	{{/if}}
 </template>
 
 <template name="details">

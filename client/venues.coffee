@@ -12,18 +12,24 @@ popularity_sort = (a,b) ->
 	return 1 if a_percent < b_percent
 	0
 
+
+venue_link_mouse_down = (evt) ->
+	Session.set 'venue_id', this._id
+	Router.setVenue(this._id)
+
+venue_link_click = (evt) ->
+	evt.preventDefault()
+
+venue_link_event_options = 
+	'mousedown a.venue-name': venue_link_mouse_down
+	'click a.venue-name': venue_link_click
+
 Template.top_three.hot = () ->
 	venues = Venues.find({}, {sort: {name: 1}}).fetch()
 	venues.sort( popularity_sort )
 	venues.slice(0,3)
 
-Template.top_three.events
-	'mousedown a.venue-name': (evt) ->
-		Session.set 'venue_id', this._id
-		Router.setVenue(this._id)
-	'click a.venue-name': (evt) ->
-		evt.preventDefault()
-
+Template.top_three.events = venue_link_event_options
 
 
 Template.top_three.percent_full = () ->
@@ -35,12 +41,7 @@ Template.venues.venues = () ->
 Template.venues.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
 
-Template.venues.events
-	'mousedown .venue': (evt) ->
-		Session.set 'venue_id', this._id
-		Router.setVenue(this._id)
-	'click .venue': (evt) ->
-		evt.preventDefault()
+Template.venues.events = venue_link_event_options
 
 Template.details.venues = () ->
 	venue_id = Session.get('venue_id')
