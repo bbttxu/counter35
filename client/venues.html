@@ -60,7 +60,13 @@
 			<h3>Hot three</h3>
 			<ul class="disc">
 				{{#each hot}}
-					<li><a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a> {{percent_full}}%</li>
+					<li>
+						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a> 
+						<span class="percent_full">{{percent_full}}%</span>
+						{{#if has_line}}
+							<span class="waiting success">{{waiting}} queued</span>
+						{{/if}}
+					</li>
 				{{/each}}
 			</ul>
 		</div>

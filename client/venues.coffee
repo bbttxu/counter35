@@ -19,9 +19,10 @@ popularity_sort = (a,b) ->
 	return 1 if a_percent < b_percent
 	0
 
-
-
-
+queue_sort = (a, b) ->
+	return -1 if a.waiting > b.waiting
+	return 1 if a.waiting < b.waiting
+	0
 
 
 venue_link_mouse_down = (evt) ->
@@ -36,11 +37,15 @@ venue_link_event_options =
 	'click a.venue-name': venue_link_click
 
 Template.top_three.hot = () ->
-	venues = Venues.find({}, {sort: {name: 1}}).fetch()
-	# venues.sort popularity_sort
-	venues.sort 'waiting'
+	venues = Venues.find({}).fetch()
+	venues.sort popularity_sort
+	venues.sort queue_sort
 	venues.slice(0,3)
 
+Template.top_three.has_line = () ->
+	return true if this.waiting > 0
+	false
+	
 Template.top_three.events = venue_link_event_options
 
 
