@@ -45,7 +45,7 @@ Template.top_three.hot = () ->
 Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
-	
+
 Template.top_three.events = venue_link_event_options
 
 
@@ -87,18 +87,18 @@ Template.details.percent_class = () ->
 Template.details.over_capacity = () ->
 	this.occupancy / this.capacity >= 1.0
 
-decrement_numbers = (shift = 1) -> 
+decrement_numbers = () -> 
 	(evt) ->
 		evt.preventDefault()
 		# update model
 		venue_id = Session.get('venue_id')
 		venue = Venues.findOne venue_id
 		if venue.waiting > 0
-			venue.waiting -= shift
+			venue.waiting -= 1
 			venue.occupancy = venue.capacity
 		else
 			venue.waiting = 0
-			venue.occupancy -= shift
+			venue.occupancy -= 1
 		venue.updated_at = now()
 		Venues.update venue_id, venue
 
@@ -119,7 +119,7 @@ increment_numbers = (shift = 1) ->
 
 Template.details.events
 	'click a.add.occupancy': increment_numbers(1)
-	'click a.subtract.occupancy': decrement_numbers(1)
+	'click a.subtract.occupancy': decrement_numbers
 	'click a.recycle.occupancy': increment_numbers(0)		
 	'click a.add.waiting': increment_numbers(1)
-	'click a.subtract.waiting': decrement_numbers(1)
+	'click a.subtract.waiting': decrement_numbers
