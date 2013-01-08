@@ -5,12 +5,23 @@ Session.set 'venue_id', null
 Venues = new Meteor.Collection("venues")
 
 
+###
+HELPERS
+###
+
+now = () ->
+	Math.round((new Date()).getTime() / 1000)
+
 popularity_sort = (a,b) ->
 	a_percent = (a.occupancy / a.capacity )
 	b_percent = (b.occupancy / b.capacity )
 	return -1 if a_percent > b_percent
 	return 1 if a_percent < b_percent
 	0
+
+
+
+
 
 
 venue_link_mouse_down = (evt) ->
@@ -26,7 +37,8 @@ venue_link_event_options =
 
 Template.top_three.hot = () ->
 	venues = Venues.find({}, {sort: {name: 1}}).fetch()
-	venues.sort( popularity_sort )
+	# venues.sort popularity_sort
+	venues.sort 'waiting'
 	venues.slice(0,3)
 
 Template.top_three.events = venue_link_event_options
@@ -43,9 +55,18 @@ Template.venues.percent_full = () ->
 
 Template.venues.events = venue_link_event_options
 
+
+
+
+###
+DETAILS
+###
+
 Template.details.venues = () ->
 	venue_id = Session.get('venue_id')
 	Venues.find({_id: venue_id}, {sort: {name: 1}})		
+
+
 
 # TODO: this is used earlier and probably should live on the model
 Template.details.percent_full = () ->
@@ -58,18 +79,42 @@ Template.details.percent_class = () ->
 	return "half-full" if percent >= 50
 	"empty"
 
-increment_occupancy = (shift) ->
+Template.details.over_capacity = () ->
+	this.occupancy / this.capacity >= 1.0
+
+decrement_numbers = (shift = 1) -> 
+	(evt) ->
+		evt.preventDefault()
+		# update model
+		venue_id = Session.get('venue_id')
+		venue = Venues.findOne venue_id
+		if venue.waiting > 0
+			venue.waiting -= shift
+			venue.occupancy = venue.capacity
+		else
+			venue.waiting = 0
+			venue.occupancy -= shift
+		venue.updated_at = now()
+		Venues.update venue_id, venue
+
+increment_numbers = (shift = 1) ->
 	(evt) ->
 		evt.preventDefault()
 		venue_id = Session.get('venue_id')
 		venue = Venues.findOne venue_id
-		venue.occupancy = venue.occupancy + shift
+		if venue.occupancy < venue.capacity
+			venue.occupancy += shift
+			venue.waiting = 0
+		else
+			venue.occupancy = venue.capacity
+			venue.waiting += 1
+		venue.waiting -= 1 if shift is 0
+		venue.updated_at = now()
 		Venues.update venue_id, venue
 
-increment_counter = increment_occupancy(1)
-decrement_counter = increment_occupancy(-1)
-
 Template.details.events
-	'click a.add': increment_counter
-	'click a.subtract': decrement_counter
-		
+	'click a.add.occupancy': increment_numbers(1)
+	'click a.subtract.occupancy': decrement_numbers(1)
+	'click a.recycle.occupancy': increment_numbers(0)		
+	'click a.add.waiting': increment_numbers(1)
+	'click a.subtract.waiting': decrement_numbers(1)

@@ -20,19 +20,32 @@
 					<h3>{{name}}</h3>
 				</div>
 				<div class="columns six mobile-two">
-					<p class="{{percent_class}}">{{percent_full}}%</p>
+					<p class="{{percent_class}}">{{occupancy}}</p>
 				</div>
 				<div class="columns six mobile-two">
 					<ul class="disc">
-						<li>{{occupancy}} occupancy</a></li>
+						<li>{{percent_full}}%</a></li>
 						<li>{{capacity}} capacity</li>
+						<li>last updated: {{updated_at}}</li>
 					</ul>
 				</div>
 				<div class="columns twelve mobile-four">
 					<ul class="button-group  block-grid two-up">
-						<li><a class="add button success" href="#">+1</a></li>
-						<li><a class="subtract button red" href="#">-1</a></li>
+						{{#if over_capacity}}
+							<li><a class="recycle button success" href="#">+1/-1</a></li>
+						{{else}}
+							<li><a class="occupancy add button success" href="#">+1</a></li>
+						{{/if}}
+						<li><a class="occupancy subtract button red" href="#">-1</a></li>
 					</ul>
+					{{#if over_capacity}}
+						<h3>{{waiting}} people waiting</h3>
+						<ul class="button-group  block-grid two-up">
+							<li><a class="waiting add button success" href="#">+1</a></li>
+							<li><a class="waiting subtract button red" href="#">-1</a></li>
+						</ul>
+					{{/if}}
+
 				</div>
 			</div>
 		{{/each}}
