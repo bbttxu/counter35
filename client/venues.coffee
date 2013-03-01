@@ -32,7 +32,7 @@ venue_link_mouse_down = (evt) ->
 venue_link_click = (evt) ->
 	evt.preventDefault()
 
-venue_link_event_options = 
+venue_link_event_options =
 	'mousedown a.venue-name': venue_link_mouse_down
 	'click a.venue-name': venue_link_click
 
@@ -69,7 +69,7 @@ DETAILS
 
 Template.details.venues = () ->
 	venue_id = Session.get('venue_id')
-	Venues.find({_id: venue_id}, {sort: {name: 1}})		
+	Venues.find({_id: venue_id}, {sort: {name: 1}})
 
 
 
@@ -87,18 +87,18 @@ Template.details.percent_class = () ->
 Template.details.over_capacity = () ->
 	this.occupancy / this.capacity >= 1.0
 
-decrement_numbers = () -> 
+decrement_numbers = (by_this_much = 1) ->
 	(evt) ->
 		evt.preventDefault()
 		# update model
 		venue_id = Session.get('venue_id')
 		venue = Venues.findOne venue_id
 		if venue.waiting > 0
-			venue.waiting -= 1
+			venue.waiting -= by_this_much
 			venue.occupancy = venue.capacity
 		else
 			venue.waiting = 0
-			venue.occupancy -= 1
+			venue.occupancy -= by_this_much
 		venue.updated_at = now()
 		Venues.update venue_id, venue
 
@@ -119,7 +119,7 @@ increment_numbers = (shift = 1) ->
 
 Template.details.events
 	'click a.add.occupancy': increment_numbers(1)
-	'click a.subtract.occupancy': decrement_numbers
-	'click a.recycle.occupancy': increment_numbers(0)		
+	'click a.subtract.occupancy': decrement_numbers()
+	'click a.recycle.occupancy': increment_numbers(0)
 	'click a.add.waiting': increment_numbers(1)
-	'click a.subtract.waiting': decrement_numbers
+	'click a.subtract.waiting': decrement_numbers()
