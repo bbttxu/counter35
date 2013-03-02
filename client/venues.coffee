@@ -40,7 +40,6 @@ Template.top_three.hot = () ->
 	venues = Venues.find({}).fetch()
 	venues.sort popularity_sort
 	venues.sort queue_sort
-	venues.slice(0,3)
 
 Template.top_three.has_line = () ->
 	return true if this.waiting > 0
@@ -77,12 +76,16 @@ Template.details.venues = () ->
 Template.details.percent_full = () ->
 	Math.round(100 * this.occupancy / this.capacity )
 
-Template.details.percent_class = () ->
+foo = () ->
 	percent = Math.round(this.occupancy / this.capacity * 100)
 	return "critical" if percent >= 100
 	return "full" if percent >= 75
 	return "half-full" if percent >= 50
 	"empty"
+
+
+Template.top_three.percent_class = foo
+Template.details.percent_class = foo
 
 Template.details.over_capacity = () ->
 	this.occupancy / this.capacity >= 1

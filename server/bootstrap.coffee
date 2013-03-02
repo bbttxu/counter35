@@ -1,19 +1,19 @@
 # server.coffee
 
-dons = 
+dons =
 	name: "Don's Silver Beet",
 	capacity: 80
-	occupancy: 73
+	occupancy: 53
 
 harveys =
 	name: "Harvey's"
 	capacity: 120
-	occupancy: 73
+	occupancy: 63
 
 kitchenmaid =
 	name: "Kitchenmade Rehersal Studios"
 	capacity: 100
-	occupancy: 73
+	occupancy: 23
 
 downtown =
 	name: "Downtown Abbey"
@@ -23,17 +23,17 @@ downtown =
 andrews =
 	name: "Andrews"
 	capacity: 90
-	occupancy: 53
+	occupancy: 32
 
 andrews =
 	name: "Andrews"
 	capacity: 90
-	occupancy: 53
+	occupancy: 43
 
 kickersdancehall =
 	name: "Kickers Dance Hall"
 	capacity: 110
-	occupancy: 93
+	occupancy: 73
 
 app_bootstrap = ->
 	venues = [dons, harveys, kitchenmaid, downtown, andrews, kickersdancehall ]

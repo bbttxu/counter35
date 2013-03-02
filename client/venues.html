@@ -5,7 +5,7 @@
 			<h3>All Venues</h3>
 			<ul class="disc">
 				{{#each venues}}
-					<li><a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a></li>
+					<li>{{name}}</li>
 				{{/each}}
 			</ul>
 		</div>
@@ -30,7 +30,7 @@
 					</ul>
 				</div>
 				<div class="columns twelve mobile-four">
-					<ul class="button-group  block-grid two-up">
+					<ul class="button-group block-grid two-up">
 						{{#if over_capacity}}
 							<li><a class="recycle button success" href="#">+1/-1</a></li>
 						{{else}}
@@ -39,8 +39,8 @@
 						<li><a class="occupancy subtract button red" href="#">-1</a></li>
 					</ul>
 					{{#if over_capacity}}
-						<h3>{{waiting}} people waiting</h3>
-						<ul class="button-group  block-grid two-up">
+						<h3>~{{waiting}} people waiting</h3>
+						<ul class="button-group block-grid two-up">
 							<li><a class="waiting add button success" href="#">+ 5</a></li>
 							<li><a class="waiting subtract button red" href="#">- 5</a></li>
 						</ul>
@@ -57,15 +57,17 @@
 <template name="top_three">
 	{{#if hot}}
 		<div class="panel">
-			<h3>Hot three</h3>
-			<ul class="disc">
+			<h3>All Venues</h3>
+			<ol class="disc">
 				{{#each hot}}
 					<li>
-						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a>
-						<span class="percent_full">{{percent_full}}%</span>
+
+						{{name}}
+						<span class="right {{percent_class}}">{{percent_full}}%
 						{{#if has_line}}
 							<span class="waiting success">/ {{waiting}} queued</span>
 						{{/if}}
+						</span>
 					</li>
 				{{/each}}
 			</ul>

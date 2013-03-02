@@ -1,20 +1,36 @@
 /*venues.css*/
 p.critical {
 	font-size: 3em;
-	color:red;
 }
 
 p.full {
 	font-size: 3em;
-	color: orange;
 }
 
 p.half-full {
 	font-size: 3em;
-	color: blue;
 }
+
 p.empty {
-	color: black;
 	font-size: 3em;
 }
 
+/*venues.css*/
+p.critical, span.critical {
+	color:red;
+}
+
+p.full, span.full {
+	color: orange;
+}
+
+p.half-full, span.half-full {
+	color: blue;
+}
+p.empty, span.empty {
+	color: black;
+}
+
+li span.right {
+	float: right;
+}
