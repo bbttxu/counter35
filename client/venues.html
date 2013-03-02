@@ -41,8 +41,8 @@
 					{{#if over_capacity}}
 						<h3>{{waiting}} people waiting</h3>
 						<ul class="button-group  block-grid two-up">
-							<li><a class="waiting add button success" href="#">+1</a></li>
-							<li><a class="waiting subtract button red" href="#">-1</a></li>
+							<li><a class="waiting add button success" href="#">+ 5</a></li>
+							<li><a class="waiting subtract button red" href="#">- 5</a></li>
 						</ul>
 					{{/if}}
 
@@ -61,7 +61,7 @@
 			<ul class="disc">
 				{{#each hot}}
 					<li>
-						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a> 
+						<a class="venue-name {{name_class}}" href="/{{_id}}">{{name}}</a>
 						<span class="percent_full">{{percent_full}}%</span>
 						{{#if has_line}}
 							<span class="waiting success">/ {{waiting}} queued</span>
