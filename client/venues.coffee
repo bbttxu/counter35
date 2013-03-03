@@ -40,7 +40,6 @@ Template.top_three.hot = () ->
 	venues = Venues.find({}).fetch()
 	venues.sort popularity_sort
 	venues.sort queue_sort
-	venues.slice(0,3)
 
 Template.top_three.has_line = () ->
 	return true if this.waiting > 0
@@ -75,17 +74,21 @@ Template.details.venues = () ->
 
 # TODO: this is used earlier and probably should live on the model
 Template.details.percent_full = () ->
-	Math.round(this.occupancy / this.capacity * 100)
+	Math.round(100 * this.occupancy / this.capacity )
 
-Template.details.percent_class = () ->
+foo = () ->
 	percent = Math.round(this.occupancy / this.capacity * 100)
 	return "critical" if percent >= 100
 	return "full" if percent >= 75
 	return "half-full" if percent >= 50
 	"empty"
 
+
+Template.top_three.percent_class = foo
+Template.details.percent_class = foo
+
 Template.details.over_capacity = () ->
-	this.occupancy / this.capacity >= 1.0
+	this.occupancy / this.capacity >= 1
 
 decrement_numbers = (by_this_much = 1) ->
 	(evt) ->
@@ -98,7 +101,9 @@ decrement_numbers = (by_this_much = 1) ->
 			venue.occupancy = venue.capacity
 		else
 			venue.waiting = 0
-			venue.occupancy -= by_this_much
+			venue.occupancy -= 1
+
+
 		venue.updated_at = now()
 		Venues.update venue_id, venue
 
@@ -112,7 +117,7 @@ increment_numbers = (shift = 1) ->
 			venue.waiting = 0
 		else
 			venue.occupancy = venue.capacity
-			venue.waiting += 1
+			venue.waiting += shift
 		venue.waiting -= 1 if shift is 0
 		venue.updated_at = now()
 		Venues.update venue_id, venue
@@ -121,5 +126,5 @@ Template.details.events
 	'click a.add.occupancy': increment_numbers(1)
 	'click a.subtract.occupancy': decrement_numbers()
 	'click a.recycle.occupancy': increment_numbers(0)
-	'click a.add.waiting': increment_numbers(1)
-	'click a.subtract.waiting': decrement_numbers()
+	'click a.add.waiting': increment_numbers(5)
+	'click a.subtract.waiting': decrement_numbers(5)

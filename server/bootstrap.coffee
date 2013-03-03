@@ -58,7 +58,6 @@ sweetwater =
   occupancy: 0
 
 
-
 app_bootstrap = ->
   venues = [andys, banter, burguesa, dans, haileys, thehive, jandjs, thelabb, mellowmushroom, rubbergloves, sweetwater ]
   Venues.insert({name: venue.name, capacity: venue.capacity, occupancy: venue.occupancy}) for venue in venues if Venues.find().count() < 1
