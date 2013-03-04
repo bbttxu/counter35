@@ -1,42 +1,65 @@
 # server.coffee
 
-dons =
-	name: "Don's Silver Beet",
-	capacity: 80
-	occupancy: 53
+andys =
+  name: "Andy's",
+  capacity: 221
+  occupancy: 0
 
-harveys =
-	name: "Harvey's"
-	capacity: 120
-	occupancy: 63
+banter =
+  name: "Banter"
+  capacity: 49
+  occupancy: 0
 
-kitchenmaid =
-	name: "Kitchenmade Rehersal Studios"
-	capacity: 100
-	occupancy: 23
+# todo - update burguesa's capacity
+burguesa =
+  name: "Burguesa"
+  capacity: 100
+  occupancy: 0
 
-downtown =
-	name: "Downtown Abbey"
-	capacity: 60
-	occupancy: 43
+dans =
+  name: "Dan's Silverleaf"
+  capacity: 250
+  occupancy: 0
 
-andrews =
-	name: "Andrews"
-	capacity: 90
-	occupancy: 32
+haileys =
+  name: "Hailey's"
+  capacity: 350
+  occupancy: 0
 
-andrews =
-	name: "Andrews"
-	capacity: 90
-	occupancy: 43
+# todo - update the hive's capacity
+thehive =
+  name: "The Hive"
+  capacity: 100
+  occupancy: 0
 
-kickersdancehall =
-	name: "Kickers Dance Hall"
-	capacity: 110
-	occupancy: 73
+jandjs =
+  name: "J&J's Pizza"
+  capacity: 80
+  occupancy: 0
+
+thelabb =
+  name: "The Labb"
+  capacity: 299
+  occupancy: 0
+
+mellowmushroom =
+  name: "Mellow Mushroom"
+  capacity: 299
+  occupancy: 0
+
+rubbergloves =
+  name: "Rubber Gloves Rehearsal Studios"
+  capacity: 200
+  occupancy: 0
+
+sweetwater =
+  name: "Sweetwater Grill and Bar"
+  capacity: 75
+  occupancy: 0
+
 
 app_bootstrap = ->
-	venues = [dons, harveys, kitchenmaid, downtown, andrews, kickersdancehall ]
-	Venues.insert({name: venue.name, capacity: venue.capacity, occupancy: venue.occupancy}) for venue in venues if Venues.find().count() < 1
+  venues = [andys, banter, burguesa, dans, haileys, thehive, jandjs, thelabb, mellowmushroom, rubbergloves, sweetwater ]
+  Venues.insert({name: venue.name, capacity: venue.capacity, occupancy: venue.occupancy}) for venue in venues if Venues.find().count() < 1
 
 Meteor.startup app_bootstrap
