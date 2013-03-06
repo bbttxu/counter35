@@ -3,6 +3,7 @@
 Session.set 'venue_id', null
 
 Venues = new Meteor.Collection("venues")
+Stats = new Meteor.Collection("stats")
 
 
 ###
@@ -89,6 +90,9 @@ Template.details.percent_class = foo
 Template.details.over_capacity = () ->
   this.occupancy / this.capacity >= 1
 
+# report_change = ( venue_id, change )->
+
+
 decrement_numbers = (by_this_much = 1) ->
   (evt) ->
     evt.preventDefault()
@@ -105,6 +109,13 @@ decrement_numbers = (by_this_much = 1) ->
 
     venue.updated_at = now()
     Venues.update venue_id, venue
+    Stats.insert
+      "venue_id": venue_id
+      "change": by_this_much
+      "occupancy": venue.occupancy
+      "capacity": venue.capacity
+      "waiting":  venue.waiting
+      "reported_at": now()
 
 increment_numbers = (shift = 1) ->
   (evt) ->
@@ -120,6 +131,13 @@ increment_numbers = (shift = 1) ->
     venue.waiting -= 1 if shift is 0
     venue.updated_at = now()
     Venues.update venue_id, venue
+    Stats.insert
+      "venue_id": venue_id
+      "change": shift
+      "occupancy": venue.occupancy
+      "capacity": venue.capacity
+      "waiting":  venue.waiting
+      "reported_at": now()
 
 Template.details.events
   'click a.add.occupancy': increment_numbers(1)
