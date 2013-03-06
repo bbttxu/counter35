@@ -13,17 +13,17 @@ now = () ->
   Math.round((new Date()).getTime() / 1000)
 
 popularity_sort = (a,b) ->
-  a_percent = (a.occupancy / a.capacity )
-  b_percent = (b.occupancy / b.capacity )
+  a_percent = (100.0 * a.occupancy / a.capacity )
+  b_percent = (100.0 * b.occupancy / b.capacity )
+
   return -1 if a_percent > b_percent
   return 1 if a_percent < b_percent
-  0
 
-queue_sort = (a, b) ->
+  # if percentages are matched, compare on queue
   return -1 if a.waiting > b.waiting
   return 1 if a.waiting < b.waiting
-  0
 
+  0
 
 venue_link_mouse_down = (evt) ->
   Session.set 'venue_id', this._id
@@ -39,7 +39,6 @@ venue_link_event_options =
 Template.top_three.hot = () ->
   venues = Venues.find({}).fetch()
   venues.sort popularity_sort
-  venues.sort queue_sort
 
 Template.top_three.has_line = () ->
   return true if this.waiting > 0
