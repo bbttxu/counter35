@@ -2,18 +2,18 @@
 # Venues = new Meteor.Collection "venues"
 
 api_startup = () ->
-	options = 
-		# authToken: undefined
-		apiPath: 'api'
-		standAlone: false
+  options =
+    # authToken: undefined
+    apiPath: 'api'
+    standAlone: false
 
-	venueApi = new CollectionAPI(options)
+  venueApi = new CollectionAPI(options)
 
-	venue_api_options = 
-		# authToken: undefined
-		methods: ['GET']
+  venue_api_options =
+    # authToken: undefined
+    methods: ['GET']
 
-	venueApi.addCollection(Venues, 'venues', venue_api_options)
-	venueApi.start()
+  venueApi.addCollection(Venues, 'venues', venue_api_options)
+  venueApi.start()
 
 Meteor.startup api_startup
