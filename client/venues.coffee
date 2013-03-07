@@ -3,8 +3,7 @@
 Session.set 'venue_id', null
 
 Venues = new Meteor.Collection("venues")
-Stats = new Meteor.Collection("stats")
-
+Statistics = new Meteor.Collection("statistics")
 
 ###
 HELPERS
@@ -108,14 +107,15 @@ decrement_numbers = (by_this_much = 1) ->
 
 
     venue.updated_at = now()
-    Venues.update venue_id, venue
-    Stats.insert
+    Statistics.insert
+      "venue": venue.name
       "venue_id": venue_id
       "change": by_this_much
       "occupancy": venue.occupancy
       "capacity": venue.capacity
       "waiting":  venue.waiting
       "reported_at": now()
+    Venues.update venue_id, venue
 
 increment_numbers = (shift = 1) ->
   (evt) ->
@@ -130,14 +130,15 @@ increment_numbers = (shift = 1) ->
       venue.waiting += shift
     venue.waiting -= 1 if shift is 0
     venue.updated_at = now()
-    Venues.update venue_id, venue
-    Stats.insert
+    Statistics.insert
+      "venue": venue.name
       "venue_id": venue_id
       "change": shift
       "occupancy": venue.occupancy
       "capacity": venue.capacity
       "waiting":  venue.waiting
       "reported_at": now()
+    Venues.update venue_id, venue
 
 Template.details.events
   'click a.add.occupancy': increment_numbers(1)
