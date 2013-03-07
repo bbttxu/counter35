@@ -61,14 +61,12 @@
       <ol class="disc">
         {{#each hot}}
           <li>
-            <a href="#" class="venue-name">
-              {{name}}
-              <span class="right {{percent_class}}">{{percent_full}}%
-              {{#if has_line}}
-                <span class="waiting success">/ {{waiting}} queued</span>
-              {{/if}}
-              </span>
-            </a>
+            {{name}}
+            <span class="right {{percent_class}}">{{percent_full}}%
+            {{#if has_line}}
+              <span class="waiting success">/ {{waiting}} queued</span>
+            {{/if}}
+            </span>
           </li>
         {{/each}}
       </ul>
