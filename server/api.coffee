@@ -6,13 +6,10 @@
 #     # authToken: undefined
 #     apiPath: 'api'
 #     standAlone: false
-
 #   venueApi = new CollectionAPI(options)
-
 #   venue_api_options =
 #     # authToken: undefined
 #     methods: ['GET']
-
 #   venueApi.addCollection(Venues, 'venues', venue_api_options)
 #   venueApi.start()
 

@@ -56,6 +56,13 @@ Template.venues.venues = () ->
 Template.venues.percent_full = () ->
   Math.round(this.occupancy / this.capacity * 100)
 
+# Template.venues.percent_full = () ->
+# 	Math.round(this.occupancy / this.capacity * 100)
+
+Template.venues.has_line = () ->
+	return true if this.waiting > 0
+	false
+
 Template.venues.events = venue_link_event_options
 
 
