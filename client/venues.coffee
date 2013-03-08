@@ -36,11 +36,31 @@ venue_link_event_options =
 	'mousedown a.venue-name': venue_link_mouse_down
 	'click a.venue-name': venue_link_click
 
+Template.top_three.hot = () ->
+	venues = Venues.find({}).fetch()
+	venues.sort popularity_sort
+	venues.sort queue_sort
+
+Template.top_three.has_line = () ->
+	return true if this.waiting > 0
+	false
+
+Template.top_three.events = venue_link_event_options
+
+
+Template.top_three.percent_full = () ->
+	Math.round(this.occupancy / this.capacity * 100)
+
 Template.venues.venues = () ->
 	Venues.find({}, {sort: {name: 1}})
 
 Template.venues.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
+
+Template.venues.events = venue_link_event_options
+
+Template.venues.venues = () ->
+	Venues.find({}, {sort: {name: 1}})
 
 Template.venues.percent_full = () ->
 	Math.round(this.occupancy / this.capacity * 100)
@@ -48,9 +68,6 @@ Template.venues.percent_full = () ->
 Template.venues.has_line = () ->
 	return true if this.waiting > 0
 	false
-
-Template.venues.events = venue_link_event_options
-
 
 
 

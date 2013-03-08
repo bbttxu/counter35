@@ -1,5 +1,5 @@
 # N.B. This is already declared in publish.coffee
-Venues = new Meteor.Collection "venues"
+# Venues = new Meteor.Collection "venues"
 
 api_startup = () ->
 	options =
