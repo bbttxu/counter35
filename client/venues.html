@@ -5,7 +5,7 @@
 	{{#each venues}}
 		<li>
 		  <span class="venue-name">{{name}}</span>
-		  <span class="venue-occ {{percent_class}}">{{percent_full}}</span>
+		  <span class="venue-occ {{percent_class}}">{{percent_full}}%</span>
 		{{#if has_line}}
 			<span class="waiting">/ {{waiting}} in line</span>
 		{{/if}}
@@ -29,7 +29,7 @@
         </p>
   		{{#if over_capacity}}
         <p class="big">
-          <span class="js-data" data-queue>~{{waiting}}</span> people waiting
+          <span class="js-data" data-queue><span class="tilde">~</span> {{waiting}}</span> people waiting
         </p>
 			{{/if}}
         <ul class="small">
