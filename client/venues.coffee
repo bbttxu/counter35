@@ -44,76 +44,13 @@ Template.top_three.has_line = () ->
   return true if this.waiting > 0
   false
 
-# Template.top_three.current_activity = (id) ->
-#   stats = Stats_compiled.find _id: id
-#   return "++" if stats.value > 0.6
-#   return "+" if stats.value > 0.2
-#   return "--" if stats.value > -0.6
-#   return "-" if stats.value > -0.2
-#   ""
-
-# Template.top_three.helpers
-#   activity: (_id)->
-#     stats = Stats_compiled.find _id: id
-#     return "++" if stats.value > 0.6
-#     return "+" if stats.value > 0.2
-#     return "--" if stats.value > -0.6
-#     return "-" if stats.value > -0.2
-#     ""
-
-# Template.top_three.events = venue_link_event_options
-
 
 Template.top_three.percent_full = () ->
   Math.round(this.occupancy / this.capacity * 100)
-# =======
-# Template.top_three.hot = () ->
-# 	venues = Venues.find({}).fetch()
-# 	venues.sort popularity_sort
-# 	venues.sort queue_sort
-
-# Template.top_three.has_line = () ->
-# 	return true if this.waiting > 0
-# 	false
-
-# Template.top_three.events = venue_link_event_options
-
-
-# Template.top_three.percent_full = () ->
-# 	Math.round(this.occupancy / this.capacity * 100)
-
-# Template.venues.venues = () ->
-# 	Venues.find({}, {sort: {name: 1}})
-# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
-
-# Template.venues.venues1 = () ->
-#   Venues.find({}, {sort: {name: 1}})
-
-# Template.venues.percent_full = () ->
-#   Math.round(this.occupancy / this.capacity * 100)
-# =======
-# Template.venues.events = venue_link_event_options
-
-# Template.venues.venues = () ->
-# 	Venues.find({}, {sort: {name: 1}})
-
-# Template.venues.percent_full = () ->
-# 	Math.round(this.occupancy / this.capacity * 100)
-# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
-
-# Template.venues.percent_full = () ->
-# 	Math.round(this.occupancy / this.capacity * 100)
 
 Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
-
-
-# Template.venues.events = venue_link_event_options
-
-
-# =======
-# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
 
 
 ###
@@ -144,12 +81,9 @@ Template.details.percent_class = foo
 Template.details.over_capacity = () ->
   this.occupancy / this.capacity >= 1
 
-# report_change = ( venue_id, change )->
-
-
 decrement_numbers = (by_this_much = 1) ->
   (evt) ->
-    evt.preventDefault() if evt
+    evt.preventDefault()
     # update model
     venue_id = Session.get('venue_id')
     venue = Venues.findOne venue_id
@@ -192,7 +126,7 @@ decrement_numbers = (by_this_much = 1) ->
 
 increment_numbers = (shift = 1) ->
   (evt) ->
-    evt.preventDefault() if evt
+    evt.preventDefault()
     venue_id = Session.get('venue_id')
     venue = Venues.findOne venue_id
     if venue.occupancy < venue.capacity
@@ -217,8 +151,9 @@ increment_numbers = (shift = 1) ->
 
 in_n_out = ()->
   (evt)->
-    decrement_numbers(1)()
-    increment_numbers(1)()
+    # evt.preventDefault()
+    decrement_numbers(1)(evt)
+    increment_numbers(1)(evt)
 
 
 Template.details.events

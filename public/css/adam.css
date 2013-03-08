@@ -20,5 +20,5 @@ ul.venues li {
 }
 
 ul.venues li:nth-child(odd) {
-  background: #eee;
+  background: #f9f9fb;
 }
