@@ -105,15 +105,32 @@ decrement_numbers = (by_this_much = 1) ->
     # update model
     venue_id = Session.get('venue_id')
     venue = Venues.findOne venue_id
-    if venue.waiting > 0
-      venue.waiting -= by_this_much
-      venue.occupancy = venue.capacity
-    else
-      venue.waiting = 0
-      venue.occupancy -= 1
+
+    new_waiting = venue.waiting
+    new_occupancy = venue.occupancy
+
+    if venue.waiting > by_this_much
+      new_waiting -= by_this_much
+      new_occupancy = venue.capacity
+
+
+    if venue.waiting < by_this_much
+      new_waiting = 0
+      new_occupancy -= (by_this_much - venue.waiting)
+
+    if venue.waiting is by_this_much
+      new_waiting = 0
+      new_occupancy = venue.capacity
+
+    if new_occupancy < 0
+      new_occupancy = 0
+
+    venue.waiting = new_waiting
+    venue.occupancy = new_occupancy
 
 
     venue.updated_at = now()
+    venue.flux += Math.abs(by_this_much)
     Statistics.insert
       "venue": venue.name
       "venue_id": venue_id
@@ -137,6 +154,8 @@ increment_numbers = (shift = 1) ->
       venue.waiting += shift
     venue.waiting -= 1 if shift is 0
     venue.updated_at = now()
+    venue.flux += Math.abs(shift)
+
     Statistics.insert
       "venue": venue.name
       "venue_id": venue_id
