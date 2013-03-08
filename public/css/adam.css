@@ -13,6 +13,7 @@ h2 {
   font-family: 'function_pro_bookbold', 'Futura Std Heavy', Futura, 'Helvetica Neue', Arial, sans-serif;
   font-weight: bold;
   text-transform: none;
+  margin-bottom: 0.3em !important;
 }
 
 ul.venues li {
