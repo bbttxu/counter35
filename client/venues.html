@@ -8,7 +8,7 @@
       <span class="right">
         <span class="venue-occ {{percent_class}}">{{percent_full}}%</span>
         {{#if has_line}}
-          <span class="waiting">/ {{waiting}} queued</span>
+          <span class="waiting">/ {{waiting}} in line</span>
         {{/if}}
       </span>
     </li>
@@ -31,7 +31,7 @@
         </p>
       {{#if over_capacity}}
         <p class="big">
-          <span class="js-data" data-queue><span class="tilde">~</span> {{waiting}}</span> people waiting
+          <span class="js-data" data-queue><span class="tilde">~</span> {{waiting}}</span> in line
         </p>
       {{/if}}
         <ul class="small">
