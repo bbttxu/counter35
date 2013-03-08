@@ -101,13 +101,14 @@ Template.details.over_capacity = () ->
 
 decrement_numbers = (by_this_much = 1) ->
   (evt) ->
-    evt.preventDefault()
+    evt.preventDefault() if evt
     # update model
     venue_id = Session.get('venue_id')
     venue = Venues.findOne venue_id
 
     new_waiting = venue.waiting
     new_occupancy = venue.occupancy
+    new_flux =  Math.abs(by_this_much)
 
     if venue.waiting > by_this_much
       new_waiting -= by_this_much
@@ -124,13 +125,13 @@ decrement_numbers = (by_this_much = 1) ->
 
     if new_occupancy < 0
       new_occupancy = 0
-
+      new_flux = 0
     venue.waiting = new_waiting
     venue.occupancy = new_occupancy
 
 
     venue.updated_at = now()
-    venue.flux += Math.abs(by_this_much)
+    venue.flux += new_flux
     Statistics.insert
       "venue": venue.name
       "venue_id": venue_id
@@ -143,7 +144,7 @@ decrement_numbers = (by_this_much = 1) ->
 
 increment_numbers = (shift = 1) ->
   (evt) ->
-    evt.preventDefault()
+    evt.preventDefault() if evt
     venue_id = Session.get('venue_id')
     venue = Venues.findOne venue_id
     if venue.occupancy < venue.capacity
@@ -166,9 +167,16 @@ increment_numbers = (shift = 1) ->
       "reported_at": now()
     Venues.update venue_id, venue
 
+in_n_out = ()->
+  (evt)->
+    decrement_numbers(1)()
+    increment_numbers(1)()
+
+
 Template.details.events
   'click a.add-one': increment_numbers(1)
   'click a.sub-one': decrement_numbers()
-  'click a.recycle.occupancy': increment_numbers(0)
+  'click a.recycle.js-in-n-out': in_n_out()
+
   'click a.add-five': increment_numbers(5)
   'click a.sub-five': decrement_numbers(5)
