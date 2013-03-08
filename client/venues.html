@@ -1,76 +1,62 @@
 <!-- venues.html -->
 <template name="venues">
-	{{#if venues}}
-		<div class="panel">
-			<h3>All Venues</h3>
-			<ul class="disc">
-				{{#each venues}}
-					<li>{{name}}</li>
-				{{/each}}
-			</ul>
-		</div>
-	{{/if}}
+{{#if venues}}
+	<ul>
+	{{#each venues}}
+		<li>
+		  <span class="venue-name">{{name}}</span>
+		  <span class="venue-occ {{percent_class}}">{{percent_full}}</span>
+		{{#if has_line}}
+			<span class="waiting">/ {{waiting}} queued</span>
+		{{/if}}
+		</li>
+	{{/each}}
+	</ul>
+{{/if}}
 </template>
 
 <template name="details">
 	{{#if venues}}
 		{{#each venues}}
-			<div class="venue row">
-				<div class="columns twelve mobile-four">
-					<h3>{{name}}</h3>
-				</div>
-				<div class="columns six mobile-two">
-					<p class="{{percent_class}}">{{occupancy}}</p>
-				</div>
-				<div class="columns six mobile-two">
-					<ul class="disc">
-						<li>{{percent_full}}%</a></li>
-						<li>{{capacity}} capacity</li>
-						<li>last updated: {{updated_at}}</li>
-					</ul>
-				</div>
-				<div class="columns twelve mobile-four">
-					<ul class="button-group block-grid two-up">
-						{{#if over_capacity}}
-							<li><a class="recycle button success" href="#">+1/-1</a></li>
-						{{else}}
-							<li><a class="occupancy add button success" href="#">+1</a></li>
-						{{/if}}
-						<li><a class="occupancy subtract button red" href="#">-1</a></li>
-					</ul>
-					{{#if over_capacity}}
-						<h3>~{{waiting}} people waiting</h3>
-						<ul class="button-group block-grid two-up">
-							<li><a class="waiting add button success" href="#">+ 5</a></li>
-							<li><a class="waiting subtract button red" href="#">- 5</a></li>
-						</ul>
-					{{/if}}
 
-				</div>
-			</div>
+      <div class="info">
+        <p class="big">
+          <span class="data {{percent_class}}" data-occupancy-count>{{occupancy}}</span>
+          <small>
+            / <span class="js-data" data-capacity>{{capacity}}</span> total
+            = <span class="js-data" data-occupancy-percentage>{{percent_full}}</span>% full
+          </small>
+        </p>
+  		{{#if over_capacity}}
+        <p class="big">
+          <span class="js-data" data-queue>~{{waiting}}</span> people waiting
+        </p>
+			{{/if}}
+        <ul class="small">
+          <li>total nightly traffic: <span class="js-data" data-traffic>___</span></li>
+          <li>last updated: <span class="js-data" data-updated-time>{{updated_at}}</span></li>
+        </ul>
+      </div>
+
+
+		{{#if over_capacity}}
+      <div class="one-in-one-out">
+        <a href="#" class="recycle button c js-counter js-in-n-out">1 in / 1 out</a>
+      </div>
+      <h4 class="in-line">Waiting in line...</h4>
+		{{/if}}
+
+      <div class="by-one two-up clearfix">
+        <a href="#" data-delta="1" class="occupancy subtract button js-counter js-decrement">- 1</a>
+        <a href="#" data-delta="1" class="occupancy add button c js-counter js-increment">+ 1</a>
+      </div>
+
+      <div class="by-five two-up clearfix">
+        <a href="#" data-delta="5" class="occupancy subtract button js-counter js-decrement">- 5</a>
+        <a href="#" data-delta="5" class="occupancy add button c js-counter js-increment">+ 5</a>
+      </div>
+
+		</div><!-- .info -->
 		{{/each}}
-	{{else}}
-		<p>Please select a venue from the drop-down.</p>
-	{{/if}}
-</template>
-
-<template name="top_three">
-	{{#if hot}}
-		<div class="panel">
-			<h3>All Venues</h3>
-			<ol class="disc">
-				{{#each hot}}
-					<li>
-
-						{{name}}
-						<span class="right {{percent_class}}">{{percent_full}}%
-						{{#if has_line}}
-							<span class="waiting success">/ {{waiting}} queued</span>
-						{{/if}}
-						</span>
-					</li>
-				{{/each}}
-			</ul>
-		</div>
 	{{/if}}
 </template>

@@ -25,6 +25,7 @@ haileys =
   name: "Hailey's"
   capacity: 400
   occupancy: 0
+#  slug: haileys
 
 # todo - update the hive's capacity
 thehive =

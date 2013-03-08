@@ -1,15 +1,15 @@
 # N.B. This is already declared in publish.coffee
-# Venues = new Meteor.Collection "venues"
+Venues = new Meteor.Collection "venues"
 
 api_startup = () ->
-	options = 
+	options =
 		# authToken: undefined
 		apiPath: 'api'
 		standAlone: false
 
 	venueApi = new CollectionAPI(options)
 
-	venue_api_options = 
+	venue_api_options =
 		# authToken: undefined
 		methods: ['GET']
 
