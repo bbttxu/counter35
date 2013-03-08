@@ -6,3 +6,19 @@ body {
 span.right {
   float: right;
 }
+
+h2 {
+  display: block;
+  /*font-size: 1.17em;*/
+  font-family: 'function_pro_bookbold', 'Futura Std Heavy', Futura, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
+  text-transform: none;
+}
+
+ul.venues li {
+  clear: both;
+}
+
+ul.venues li:nth-child(odd) {
+  background: #eee;
+}

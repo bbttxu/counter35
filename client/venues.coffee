@@ -44,6 +44,23 @@ Template.top_three.has_line = () ->
   return true if this.waiting > 0
   false
 
+# Template.top_three.current_activity = (id) ->
+#   stats = Stats_compiled.find _id: id
+#   return "++" if stats.value > 0.6
+#   return "+" if stats.value > 0.2
+#   return "--" if stats.value > -0.6
+#   return "-" if stats.value > -0.2
+#   ""
+
+# Template.top_three.helpers
+#   activity: (_id)->
+#     stats = Stats_compiled.find _id: id
+#     return "++" if stats.value > 0.6
+#     return "+" if stats.value > 0.2
+#     return "--" if stats.value > -0.6
+#     return "-" if stats.value > -0.2
+#     ""
+
 # Template.top_three.events = venue_link_event_options
 
 
@@ -166,7 +183,7 @@ decrement_numbers = (by_this_much = 1) ->
     Statistics.insert
       "venue": venue.name
       "venue_id": venue_id
-      "change": by_this_much
+      "change": 0 - by_this_much
       "occupancy": venue.occupancy
       "capacity": venue.capacity
       "waiting":  venue.waiting
