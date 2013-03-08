@@ -50,20 +50,20 @@ Template.top_three.has_line = () ->
 Template.top_three.percent_full = () ->
   Math.round(this.occupancy / this.capacity * 100)
 
-Template.venues.venues = () ->
-  Venues.find({}, {sort: {name: 1}})
+# Template.venues.venues1 = () ->
+#   Venues.find({}, {sort: {name: 1}})
 
-Template.venues.percent_full = () ->
-  Math.round(this.occupancy / this.capacity * 100)
+# Template.venues.percent_full = () ->
+#   Math.round(this.occupancy / this.capacity * 100)
 
 # Template.venues.percent_full = () ->
 # 	Math.round(this.occupancy / this.capacity * 100)
 
-Template.venues.has_line = () ->
+Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
 
-Template.venues.events = venue_link_event_options
+# Template.venues.events = venue_link_event_options
 
 
 
@@ -148,8 +148,8 @@ increment_numbers = (shift = 1) ->
     Venues.update venue_id, venue
 
 Template.details.events
-  'click a.add.occupancy': increment_numbers(1)
-  'click a.subtract.occupancy': decrement_numbers()
+  'click a.add-one': increment_numbers(1)
+  'click a.sub-one': decrement_numbers()
   'click a.recycle.occupancy': increment_numbers(0)
-  'click a.add.waiting': increment_numbers(5)
-  'click a.subtract.waiting': decrement_numbers(5)
+  'click a.add-five': increment_numbers(5)
+  'click a.sub-five': decrement_numbers(5)

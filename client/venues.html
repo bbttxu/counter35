@@ -1,24 +1,26 @@
 <!-- venues.html -->
-<template name="venues">
-{{#if venues}}
-	<ul>
-	{{#each venues}}
-		<li>
-		  <span class="venue-name">{{name}}</span>
-		  <span class="venue-occ {{percent_class}}">{{percent_full}}</span>
-		{{#if has_line}}
-			<span class="waiting">/ {{waiting}} queued</span>
-		{{/if}}
-		</li>
-	{{/each}}
-	</ul>
+<template name="top_three">
+{{#if hot}}
+  <ul>
+  {{#each hot}}
+    <li>
+      <span class="venue-name">{{name}}</span>
+      <span class="right">
+        <span class="venue-occ {{percent_class}}">{{percent_full}}</span>
+        {{#if has_line}}
+          <span class="waiting">/ {{waiting}} queued</span>
+        {{/if}}
+      </span>
+    </li>
+  {{/each}}
+  </ul>
 {{/if}}
 </template>
 
 <template name="details">
-	{{#if venues}}
-		{{#each venues}}
-
+  {{#if venues}}
+    {{#each venues}}
+      <h1>{{name}}</h1>
       <div class="info">
         <p class="big">
           <span class="data {{percent_class}}" data-occupancy-count>{{occupancy}}</span>
@@ -27,11 +29,11 @@
             = <span class="js-data" data-occupancy-percentage>{{percent_full}}</span>% full
           </small>
         </p>
-  		{{#if over_capacity}}
+      {{#if over_capacity}}
         <p class="big">
           <span class="js-data" data-queue>~{{waiting}}</span> people waiting
         </p>
-			{{/if}}
+      {{/if}}
         <ul class="small">
           <li>total nightly traffic: <span class="js-data" data-traffic>___</span></li>
           <li>last updated: <span class="js-data" data-updated-time>{{updated_at}}</span></li>
@@ -39,24 +41,24 @@
       </div>
 
 
-		{{#if over_capacity}}
+    {{#if over_capacity}}
       <div class="one-in-one-out">
         <a href="#" class="recycle button c js-counter js-in-n-out">1 in / 1 out</a>
       </div>
       <h4 class="in-line">Waiting in line...</h4>
-		{{/if}}
+    {{/if}}
 
       <div class="by-one two-up clearfix">
-        <a href="#" data-delta="1" class="occupancy subtract button js-counter js-decrement">- 1</a>
-        <a href="#" data-delta="1" class="occupancy add button c js-counter js-increment">+ 1</a>
+        <a href="#" data-delta="1" class="occupancy sub-one button js-counter js-decrement">- 1</a>
+        <a href="#" data-delta="1" class="occupancy add-one button c js-counter js-increment">+ 1</a>
       </div>
 
       <div class="by-five two-up clearfix">
-        <a href="#" data-delta="5" class="occupancy subtract button js-counter js-decrement">- 5</a>
-        <a href="#" data-delta="5" class="occupancy add button c js-counter js-increment">+ 5</a>
+        <a href="#" data-delta="5" class="occupancy sub-five button js-counter js-decrement sub-five">- 5</a>
+        <a href="#" data-delta="5" class="occupancy  add-five button c js-counter js-increment">+ 5</a>
       </div>
 
-		</div><!-- .info -->
-		{{/each}}
-	{{/if}}
+    </div><!-- .info -->
+    {{/each}}
+  {{/if}}
 </template>
