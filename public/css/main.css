@@ -158,6 +158,90 @@ hr + h2, hr + h3, hr + h4, hr + h5, hr + h6 {
   padding-top: 30px;
   padding-top: 3rem;
 }
+
+
+
+
+
+
+
+
+      .info { margin: 2em 0; }
+      .big { font-size: 1.5em; }
+      .big small { font-size: .75em; }
+      p.big { margin-bottom: .25em; }
+      ul {
+        padding-left: 0;
+        list-style-type: none;
+      }
+      ul.small {
+        list-style-type: disc;
+        list-style-position: inside;
+      }
+      [data-occupancy-count],
+      [data-capacity],
+      [data-queue] {
+        font-weight: bold;
+        font-family: 'function_pro_bookbold', 'Futura Std Heavy', Futura, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 1.5em;
+        margin-right: 2px;
+      }
+      [data-capacity] { margin-left: 4px; }
+      .button {
+        font: italic bold normal 20px/1 'function_pro_condensedBdIt', 'Futura Std Heavy Italic', Futura, 'Helvetica Neue', Arial, sans-serif;
+        text-transform: uppercase;
+        padding: .5em 1em;
+        background: #918f8f;
+        color: #fafafa;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        display: block;
+        text-align: center;
+        margin-bottom: 1em;
+      }
+      .button:focus,
+      .button:hover {
+        color: #fafafa !important;
+        text-decoration: none;
+      }
+      .button.c { background: #00aeef; }
+      .button.m { background: #ec008c; }
+      .two-up .button {
+        width: 48%;
+        margin: 0 4% 1em 0;
+        float: left;
+      }
+      .two-up .button:nth-child(even) { margin-right: 0; }
+      .in-line {
+        color: #918f8f;
+        margin: 2.5em 0 .5em;
+        padding-top: .5em;
+        border-top: 1px solid;
+      }
+      .no-js .button:focus,
+      .no-js .button:hover
+      .button.active {
+        background: #231f20 !important;
+      }
+
+      iframe {
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 800px;
+      }
+
+
+
+
+
+
+
+
+
+
 .ir { background-color: transparent; border: 0; overflow: hidden; /* IE 6/7 fallback */ *text-indent: -9999px; }
 .ir:before { content: ""; display: block; width: 0; height: 100%; }
 .hidden { display: none !important; visibility: hidden; }

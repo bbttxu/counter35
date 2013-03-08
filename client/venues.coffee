@@ -49,12 +49,40 @@ Template.top_three.has_line = () ->
 
 Template.top_three.percent_full = () ->
   Math.round(this.occupancy / this.capacity * 100)
+# =======
+# Template.top_three.hot = () ->
+# 	venues = Venues.find({}).fetch()
+# 	venues.sort popularity_sort
+# 	venues.sort queue_sort
+
+# Template.top_three.has_line = () ->
+# 	return true if this.waiting > 0
+# 	false
+
+# Template.top_three.events = venue_link_event_options
+
+
+# Template.top_three.percent_full = () ->
+# 	Math.round(this.occupancy / this.capacity * 100)
+
+# Template.venues.venues = () ->
+# 	Venues.find({}, {sort: {name: 1}})
+# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
 
 # Template.venues.venues1 = () ->
 #   Venues.find({}, {sort: {name: 1}})
 
 # Template.venues.percent_full = () ->
 #   Math.round(this.occupancy / this.capacity * 100)
+# =======
+# Template.venues.events = venue_link_event_options
+
+# Template.venues.venues = () ->
+# 	Venues.find({}, {sort: {name: 1}})
+
+# Template.venues.percent_full = () ->
+# 	Math.round(this.occupancy / this.capacity * 100)
+# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
 
 # Template.venues.percent_full = () ->
 # 	Math.round(this.occupancy / this.capacity * 100)
@@ -63,9 +91,12 @@ Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
 
+
 # Template.venues.events = venue_link_event_options
 
 
+# =======
+# >>>>>>> 87bee377e6ce07fc765bf6f127a0357a4d3e28e5
 
 
 ###
