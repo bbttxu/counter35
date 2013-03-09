@@ -1,5 +1,7 @@
 # venues.coffee
 
+Meteor.subscribe("all_venues");
+Meteor.subscribe("all_stats");
 Session.set 'venue_id', null
 
 Venues = new Meteor.Collection("venues")
