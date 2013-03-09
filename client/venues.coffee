@@ -36,9 +36,24 @@ venue_link_event_options =
   'mousedown a.venue-name': venue_link_mouse_down
   'click a.venue-name': venue_link_click
 
+merge_in_stats = (venue)->
+  asdf = Stats_compiled.find({_id: venue.name}).fetch()
+  # docs = asdf.toArray() if asdf
+  # keys = (key for key,value of asdf[0])
+  if asdf[0]
+    trend = asdf[0].value
+    this_trend = "none"
+    this_trend = "angle-up" if trend > 0.2
+    this_trend = "double-angle-up" if trend > 0.6
+    this_trend = "angle-down" if trend < -0.2
+    this_trend = "double-angle-down" if trend < -0.6
+    venue.trend = this_trend
+  venue
+
 Template.top_three.hot = () ->
   venues = Venues.find({}).fetch()
   venues.sort popularity_sort
+  venues = (merge_in_stats venue for venue in venues)
 
 Template.top_three.has_line = () ->
   return true if this.waiting > 0
@@ -52,6 +67,7 @@ Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
 
+# Template.top_three.events = venue_link_event_options
 
 ###
 DETAILS
