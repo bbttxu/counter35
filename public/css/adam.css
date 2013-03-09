@@ -17,9 +17,12 @@ h2 {
 }
 
 ul.venues li {
+  border-bottom: 1px solid #f9f9f9;
   clear: both;
 }
-
+ul.venues li div {
+  overflow: hidden;
+}
 ul.venues li:nth-child(odd) {
   background: #f9f9fb;
 }
