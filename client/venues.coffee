@@ -69,7 +69,7 @@ Template.top_three.has_line = () ->
 	return true if this.waiting > 0
 	false
 
-# Template.top_three.events = venue_link_event_options
+Template.top_three.events = venue_link_event_options
 
 ###
 DETAILS

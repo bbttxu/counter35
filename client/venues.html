@@ -6,14 +6,16 @@
   {{#each hot}}
     <li>
       <div>
-        <span class="venue-name">{{name}}</span>
-        <span class="right">
-          <span class="venue-occ {{percent_class}}">{{percent_full}}%</span>
-          {{#if has_line}}
-            <span class="waiting">/ {{waiting}} in line</span>
-          {{/if}}
-          <i class="icon-{{trend}}"></i>
-        </span>
+        <a href="#" class="venue-name">
+          <span class="venue-name">{{name}}</span>
+          <span class="right">
+            <span class="venue-occ {{percent_class}}">{{percent_full}}%</span>
+            {{#if has_line}}
+              <span class="waiting">/ {{waiting}} in line</span>
+            {{/if}}
+            <i class="icon-{{trend}}"></i>
+          </span>
+        </a>
       </div>
     </li>
   {{/each}}
